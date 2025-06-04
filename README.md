@@ -1,11 +1,11 @@
 # StoryWiz - AI Stories for Kids
 
-StoryWiz is an interactive web application that helps children create unique stories using AI. The application integrates with the OpenRouter API to access the deepseek/deepseek-chat:free model for generating age-appropriate, creative stories.
+StoryWiz is an interactive web application that helps children create unique stories using AI. The application integrates with the OpenRouter API to access the deepseek model for generating age-appropriate, creative stories.
 
 ## Features
 
 - Interactive story creation form with inputs for protagonist name, story type, and additional notes
-- Integration with OpenRouter API to access the deepseek/deepseek-chat:free model
+- Integration with OpenRouter API to access the deepseek model
 - Story display with child-friendly formatting and visuals
 - Story type selection with fun, visual category options (fantasy, action, adventure, etc.)
 - Option to save or share generated stories
@@ -34,7 +34,7 @@ VITE_OPENROUTER_API_KEY=your_api_key_here
 - Tailwind CSS
 - React Router
 - Lucide React for icons
-- OpenRouter API (deepseek/deepseek-chat:free model)
+- OpenRouter API (deepseek model)
 
 ## License
 
