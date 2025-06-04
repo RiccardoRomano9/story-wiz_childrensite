@@ -35,7 +35,12 @@ VITE_OPENROUTER_API_KEY=your_api_key_here
 - React Router
 - Lucide React for icons
 - OpenRouter API (deepseek model)
+  
+## Try the App
+Curious to see it in action?
+Check out the live demo here 👉 https://beamish-cupcake-87dce3.netlify.app
 
+Explore the features, test the interface, and see how it works in real time—no installation needed. Your feedback is always welcome!
 ## License
 
 This project is licensed under the MIT License.
