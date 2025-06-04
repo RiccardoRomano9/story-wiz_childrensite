@@ -107,11 +107,11 @@ const StoryCreator = () => {
             type="number"
             id="age"
             name="age"
-            min="3"
-            max="12"
+            min="1"
+            max="17"
             value={storyData.age}
             onChange={handleInputChange}
-            placeholder="Età (3-12 anni)"
+            placeholder="Età (1-17 anni)"
             className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors ${
               errors.age ? 'border-red-500' : 'border-gray-300'
             }`}
