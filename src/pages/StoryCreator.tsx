@@ -21,6 +21,7 @@ const StoryCreator = () => {
     location?: string;
     superpower?: string;
     villain?: string;
+    age?: string;
   }>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -32,6 +33,7 @@ const StoryCreator = () => {
       location?: string;
       superpower?: string;
       villain?: string;
+      age?: string;
     } = {};
     
     if (!storyData.protagonistName.trim()) {
@@ -53,6 +55,10 @@ const StoryCreator = () => {
     if (!storyData.villain.trim()) {
       newErrors.villain = 'Inserisci il nome del cattivo';
     }
+
+    if (!storyData.age || storyData.age < 3 || storyData.age > 12) {
+      newErrors.age = 'Inserisci un\'età valida (3-12 anni)';
+    }
     
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -65,7 +71,10 @@ const StoryCreator = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setStoryData(prev => ({ ...prev, [name]: value }));
+    setStoryData(prev => ({ 
+      ...prev, 
+      [name]: name === 'age' ? parseInt(value) || '' : value 
+    }));
     
     if (errors[name as keyof typeof errors]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
@@ -90,6 +99,28 @@ const StoryCreator = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-md p-6">
+        <div className="mb-6">
+          <label htmlFor="age" className="block text-gray-700 font-medium mb-2">
+            Quanti anni ha il bambino?
+          </label>
+          <input
+            type="number"
+            id="age"
+            name="age"
+            min="3"
+            max="12"
+            value={storyData.age}
+            onChange={handleInputChange}
+            placeholder="Età (3-12 anni)"
+            className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors ${
+              errors.age ? 'border-red-500' : 'border-gray-300'
+            }`}
+          />
+          {errors.age && (
+            <p className="mt-1 text-red-500 text-sm">{errors.age}</p>
+          )}
+        </div>
+
         <div className="mb-6">
           <label htmlFor="protagonistName" className="block text-gray-700 font-medium mb-2">
             Chi è il protagonista?

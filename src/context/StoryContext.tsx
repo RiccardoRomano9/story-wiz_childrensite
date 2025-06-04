@@ -9,6 +9,7 @@ interface StoryContextType {
     villain: string;
     additionalNotes: string;
     generatedStory: string;
+    age: number;
   };
   setStoryData: React.Dispatch<React.SetStateAction<{
     protagonistName: string;
@@ -18,6 +19,7 @@ interface StoryContextType {
     villain: string;
     additionalNotes: string;
     generatedStory: string;
+    age: number;
   }>>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,6 +34,7 @@ const defaultStoryData = {
   villain: '',
   additionalNotes: '',
   generatedStory: '',
+  age: 7,
 };
 
 const StoryContext = createContext<StoryContextType>({
@@ -55,7 +58,7 @@ export const StoryProvider = ({ children }: StoryProviderProps) => {
   const generateStory = async () => {
     setIsLoading(true);
     try {
-      const prompt = `Crea una storia ${storyData.storyType.toLowerCase()} per bambini su un personaggio chiamato ${storyData.protagonistName} che ha il superpotere di ${storyData.superpower}. La storia è ambientata in ${storyData.location} e il cattivo della storia è ${storyData.villain}. ${storyData.additionalNotes}. Rendi la storia coinvolgente, adatta all'età e di circa 300-400 parole con un chiaro inizio, sviluppo e fine.`;
+      const prompt = `Crea una storia ${storyData.storyType.toLowerCase()} per bambini di ${storyData.age} anni su un personaggio chiamato ${storyData.protagonistName} che ha il superpotere di ${storyData.superpower}. La storia è ambientata in ${storyData.location} e il cattivo della storia è ${storyData.villain}. ${storyData.additionalNotes}. Rendi la storia coinvolgente, adatta all'età di ${storyData.age} anni e di circa 300-400 parole con un chiaro inizio, sviluppo e fine.`;
       
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
@@ -68,7 +71,7 @@ export const StoryProvider = ({ children }: StoryProviderProps) => {
         body: JSON.stringify({
           model: 'deepseek/deepseek-chat:free',
           messages: [
-            { role: 'system', content: 'Sei un narratore creativo per bambini. Crea storie coinvolgenti e appropriate per l\'età con messaggi positivi. Rispondi in italiano.' },
+            { role: 'system', content: `Sei un narratore creativo per bambini di ${storyData.age} anni. Crea storie coinvolgenti e appropriate per l'età con messaggi positivi. Rispondi in italiano.` },
             { role: 'user', content: prompt }
           ],
           temperature: 0.7,
